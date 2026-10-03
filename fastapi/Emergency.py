@@ -7,7 +7,7 @@ app = FastAPI()
 # Ścieżka do Twojego pliku
 FILE_PATH = "ApiResponse.txt"
 
-@app.get("/plik", response_class=PlainTextResponse)
+@app.get("/Emergency", response_class=PlainTextResponse)
 def read_file():
     # Sprawdzenie, czy plik istnieje, aby uniknąć błędów
     if not os.path.exists(FILE_PATH):
