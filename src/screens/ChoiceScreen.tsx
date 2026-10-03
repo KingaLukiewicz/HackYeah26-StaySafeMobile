@@ -33,7 +33,7 @@ export default function ChoiceScreen() {
       description:
         "Wystąpienie incydentów zbrojnych lub zagrożenia atakiem powietrznym.",
       iconName: "shield-alert" as const,
-      tone: "purple" as const,
+      tone: "green" as const,
     },
   ];
   const [selectedId, setSelectedId] = useState("fire");

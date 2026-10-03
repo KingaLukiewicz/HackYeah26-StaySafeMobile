@@ -30,6 +30,7 @@ export const styles = StyleSheet.create({
   toneOrange: { color: "#b9622c", backgroundColor: "#fff0e1" },
   toneBlue: { color: "#3d6d8c", backgroundColor: "#e8f2f8" },
   tonePurple: { color: "#665f8e", backgroundColor: "#efedf8" },
+  toneGreen: { color: "#2f7d56", backgroundColor: "#e8f7ee" },
 
   textContainer: {
     minWidth: 0,
