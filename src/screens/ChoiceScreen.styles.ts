@@ -41,4 +41,36 @@ export const styles = StyleSheet.create({
     lineHeight: 20,
     marginBottom: 24,
   },
+  locationBox: {
+    backgroundColor: "#edf5f1",
+    borderRadius: 18,
+    padding: 16,
+    marginTop: 8,
+    marginBottom: 20,
+  },
+  locationBoxText: {
+    fontSize: 13,
+    lineHeight: 18,
+    color: "#50655d",
+  },
+  locationBoxBold: {
+    fontWeight: "600",
+    color: "#2b443a",
+  },
+  primaryButton: {
+    height: 54,
+    backgroundColor: "#285c49",
+    borderRadius: 17,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 8,
+    boxShadow: "0px 10px 24px rgba(40, 92, 73, 0.2)",
+    elevation: 4,
+  },
+  primaryButtonText: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#fff",
+  },
 });

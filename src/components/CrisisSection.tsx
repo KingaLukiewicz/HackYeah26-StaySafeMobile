@@ -28,7 +28,11 @@ export default function CrisisSection() {
         <Feather name="chevron-right" size={20} color="#99a39f" />
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.sirenButton} activeOpacity={0.8}>
+      <TouchableOpacity
+        style={styles.sirenButton}
+        activeOpacity={0.8}
+        onPress={() => router.push("/listening")}
+      >
         <MaterialCommunityIcons name="radio-tower" size={18} color="#395b4e" />
         <Text style={styles.sirenButtonText}>Rozpoznaj syrenę w otoczeniu</Text>
       </TouchableOpacity>

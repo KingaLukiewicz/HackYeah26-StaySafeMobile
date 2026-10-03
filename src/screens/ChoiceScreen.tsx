@@ -1,7 +1,7 @@
-import { Stack, useRouter } from "expo-router";
-// import * as Speech from "expo-speech";
 import ThreatCard from "@/components/ThreatCard";
 import { Feather } from "@expo/vector-icons";
+import { Stack, useRouter } from "expo-router";
+import * as Speech from "expo-speech";
 import { useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -36,11 +36,21 @@ export default function ChoiceScreen() {
       tone: "green" as const,
     },
   ];
-  const [selectedId, setSelectedId] = useState("war");
-  //   Speech.speak("Działaj spokojnie. Jesteśmy z Tobą.", {
-  //     language: "pl-PL",
-  //     rate: 0.92,
-  //   });
+  const [selectedId, setSelectedId] = useState("fire");
+  Speech.speak(
+    "Wybierz rodzaj zagrożenia. Dopasujemy instrukcje do Twojej sytuacji.",
+    {
+      language: "pl-PL",
+      rate: 0.92,
+    }
+  );
+
+  const handleStartGuide = () => {
+    router.push({
+      pathname: "/guide",
+      params: { threatId: selectedId },
+    });
+  };
 
   return (
     <>
@@ -49,11 +59,11 @@ export default function ChoiceScreen() {
         <View style={styles.header}>
           <TouchableOpacity
             style={styles.closeButton}
-            onPress={() => router.back()}
+            onPress={() => router.push("/")}
           >
             <Feather name="x" size={20} color="#394a43" />
           </TouchableOpacity>
-          <Text style={styles.headerTitle}>Zagrożenie wojenne</Text>
+          <Text style={styles.headerTitle}>Uruchom instrukcje</Text>
           <View style={{ width: 40 }} />
         </View>
         <ScrollView contentContainerStyle={styles.content}>
@@ -72,8 +82,24 @@ export default function ChoiceScreen() {
               iconName={item.iconName}
               tone={item.tone}
               isSelected={selectedId === item.id}
+              onPress={() => setSelectedId(item.id)}
             />
           ))}
+          <View style={styles.locationBox}>
+            <Text style={styles.locationBoxText}>
+              <Text style={styles.locationBoxBold}>Twoja lokalizacja:</Text>{" "}
+              Tworóg, Kraków. Instrukcje uwzględnią najbliższe punkty
+              bezpieczeństwa.
+            </Text>
+          </View>
+          <TouchableOpacity
+            style={styles.primaryButton}
+            onPress={handleStartGuide}
+            activeOpacity={0.85}
+          >
+            <Text style={styles.primaryButtonText}>Rozpocznij prowadzenie</Text>
+            <Feather name="chevron-right" size={20} color="#fff" />
+          </TouchableOpacity>
         </ScrollView>
       </SafeAreaView>
     </>
