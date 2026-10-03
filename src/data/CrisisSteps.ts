@@ -118,20 +118,77 @@ export const crisisData: Record<
   },
   flood: {
     title: "Powódź",
-    toneColor: "#2962ff", // Niebieski
+    toneColor: "#2f7d56",
+    locationOptions: [
+      {
+        id: "water_already",
+        label: "WODA JEST JUŻ POD DOMEM / BRAK MOŻLIWOŚCI UCIECZKI",
+      },
+      {
+        id: "water_not_yet",
+        label: "WODA JESZCZE NIE JEST POD DOMEM / ALARM POWODZIOWY",
+      },
+      {
+        id: "car",
+        label: "JESTEŚ W SAMOCHODZIE",
+      },
+    ],
+    stepsByLocation: {
+      water_already: [
+        {
+          title: "",
+          text: "Uszczelnij wszystkie okna, wejścia i drzwi garażowe. Wyłącz prąd, wodę i gaz. Odłącz akumulator w samochodzie.",
+        },
+        {
+          title: "",
+          text: "Jeśli są duże zwierzęta gospodarskie, zabezpiecz ich ucieczkę. Jeśli nie masz czasu, spuść je ze smyczy lub zabezpiecz w bezpiecznym miejscu. Zabierz wszystkich mieszkańców na najwyższe piętro.",
+        },
+        {
+          title: "",
+          text: "Jeśli masz czas, zabierz wartościowe przedmioty: żywność długoterminową, zapas wody, dokumenty, akty własności, paszporty, polisy ubezpieczeniowe i nośniki cyfrowe. Nasłuchuj radia zasilanego bateriami na częstotliwościach lokalnej stacji.",
+        },
+        {
+          title: "",
+          text: "Przygotuj plecak ewakuacyjny. Najważniejsze przedmioty: najpotrzebniejsze dokumenty, posiłki na dwa dni, apteczka, woda, butelka filtrująca z nowym filtrem, gotówka w małych nominałach, ubranie na zmianę, radio na baterie, latarka, zapalniczka, maski oddechowe, mapa, kompas, GPS, otwieracz do puszek, nóż, ołówek i notes, sztućce, kurtka przeciwdeszczowa, śpiwór, worki na śmieci, mydło, żel do dezynfekcji, kombinerki, łom, narzędzia wielofunkcyjne, gumy i sznurki, opaska zaciskowa.",
+        },
+        {
+          title: "",
+          text: "Po ewakuacji: meldujesz się w punkcie zbiórki albo u służb, aby odnotowali, że żyjesz. Nie wracasz do domu, dopóki nie zostanie odwołany alarm.",
+        },
+      ],
+      water_not_yet: [
+        {
+          title: "",
+          text: "Woda jest stosunkowo daleko, alarm przeciwpowodziowy. Zaopatrz się w zapas żywności i wody na cztery dni. Uszczelnij wszystkie okna, wejścia i drzwi garażowe. Naładuj telefon i utrzymuj wysoki poziom baterii. Zabezpiecz ważne dokumenty w workach strunowych i wynieś je na wyższe kondygnacje lub do bezpiecznego miejsca. Zanieś sprzęt AGD i cenne przedmioty na wyższe kondygnacje. W gospodarstwie rolnym przygotuj zwierzęta hodowlane do ewakuacji, przenieś paszę w miejsce nie zagrożone zalaniem, przygotuj zapas paszy na trzy doby i zgromadź dodatkowe zapasy wody dla zwierząt.",
+        },
+        {
+          title: "",
+          text: "Nasłuchuj radia zasilanego bateriami na częstotliwościach lokalnej stacji. Spakuj plecak ewakuacyjny. Jeśli jest możliwość, przeprowadź samodzielną ewakuację i przejdź do planu samochód.",
+        },
+        {
+          title: "",
+          text: "Po ewakuacji: meldujesz się w punkcie zbiórki albo u służb, aby odnotowali, że żyjesz. Nie wracasz do domu, dopóki nie zostanie odwołany alarm.",
+        },
+      ],
+      car: [
+        {
+          title: "",
+          text: "Jeśli zbliżasz się do zatopionej drogi, zawróć i znajdź alternatywną trasę. Kieruj się w stronę terenów niezagrożonych powodzią.",
+        },
+        {
+          title: "",
+          text: "W wypadku awarii samochodu, wysiądź z niego natychmiast i kieruj się na tereny wyżej położone.",
+        },
+        {
+          title: "",
+          text: "Po ewakuacji: meldujesz się w punkcie zbiórki albo u służb, aby odnotowali, że żyjesz. Nie wracasz do domu, dopóki nie zostanie odwołany alarm.",
+        },
+      ],
+    },
     steps: [
       {
-        title: "Udaj się na wyższe kondygnacje",
-        text: "Przejdź na piętro lub dach budynku. Unikaj piwnic i parteru.",
-      },
-      {
-        title: "Odłącz prąd i gaz",
-        text: "Zabezpiecz instalacje domowe, jeśli masz do nich bezpieczny dostęp.",
-      },
-      {
-        title: "Czekaj na ratunek",
-        text: "Przygotuj telefon i elementy odblaskowe, aby ułatwić służbom lokalizację.",
-        locationInfo: "Punkt zbiórki: Okoliczny teren wysoko położony",
+        title: "Wybierz, gdzie jesteś teraz",
+        text: "Na podstawie Twojej lokalizacji pokażemy Ci właściwe kroki bezpieczeństwa.",
       },
     ],
   },
