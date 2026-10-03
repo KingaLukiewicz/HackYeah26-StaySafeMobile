@@ -8,26 +8,36 @@ interface SafeCardProps {
   location?: string;
 }
 
+const threatTranslations: Record<string, string> = {
+  fire: "POŻAR",
+  flood: "POWÓDŹ",
+  war: "ZAGROŻENIE WOJENNE",
+};
+
 export default function SafeCard({
   status = "OK",
   location = "Tworóg, Kraków",
 }: SafeCardProps) {
   const router = useRouter();
+  const normalizedStatus = status.trim().toLowerCase();
   const isSafe = status.toLowerCase() === "ok";
+
+  const translatedStatus =
+    threatTranslations[normalizedStatus] || status.toUpperCase();
 
   const cardStyle = isSafe ? styles.cardSafe : styles.cardAlert;
   const titleText = isSafe
     ? "Wszystko w porządku."
-    : `WYKRYTO ZAGROŻENIE: ${status.toUpperCase()}!`;
+    : `WYKRYTO ZAGROŻENIE: ${translatedStatus}!`;
   const subtitleText = isSafe
     ? "Wszystko w porządku. System monitoruje otoczenie."
-    : `Wykryto zagrożenie: ${status.toUpperCase()}. Kliknij, aby zobaczyć instrukcje.`;
+    : `Wykryto zagrożenie: ${translatedStatus}. Kliknij, aby zobaczyć instrukcje.`;
 
   const handlePress = () => {
     if (!isSafe) {
       router.push({
         pathname: "/guide",
-        params: { threatId: status.toLowerCase() },
+        params: { threatId: normalizedStatus },
       });
     }
   };
