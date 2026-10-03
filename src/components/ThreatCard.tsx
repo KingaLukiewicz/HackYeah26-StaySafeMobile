@@ -3,7 +3,7 @@ import { useRouter } from "expo-router";
 import { Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./ThreatCard.styles";
 
-type ToneType = "red" | "orange" | "blue" | "purple";
+type ToneType = "red" | "orange" | "blue" | "purple" | "green";
 
 interface ThreatCardProps {
   id: string;
@@ -32,6 +32,8 @@ export default function ThreatCard({
         return styles.toneBlue;
       case "purple":
         return styles.tonePurple;
+      case "green":
+        return styles.toneGreen;
       default:
         return styles.toneRed;
     }
