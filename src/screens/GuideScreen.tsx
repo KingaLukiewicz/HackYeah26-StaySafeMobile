@@ -60,6 +60,34 @@ export default function GuideScreen() {
     }
   };
 
+  const goToChoice = () => {
+    setSelectedDecision(null);
+    setCurrentStepIndex(0);
+
+    try {
+      const dismissAll = (router as any).dismissAll;
+      if (typeof dismissAll === "function") {
+        dismissAll();
+        setTimeout(() => {
+          try {
+            router.push("/choice");
+          } catch {
+            router.replace("/choice");
+          }
+        }, 0);
+        return;
+      }
+    } catch {
+      // fallback below
+    }
+
+    try {
+      router.replace("/choice");
+    } catch {
+      router.push("/choice");
+    }
+  };
+
   const handlePrev = () => {
     if (selectedDecision) {
       setSelectedDecision(null);
@@ -71,12 +99,11 @@ export default function GuideScreen() {
       return;
     }
 
-    if (normalizedLocation) {
-      router.setParams({ location: "" });
-      return;
-    }
+    goToChoice();
+  };
 
-    router.push("/choice");
+  const handleSafePlace = () => {
+    goToChoice();
   };
 
   const handleDecision = (option: (typeof decisionOptions)[number]) => {
@@ -124,7 +151,7 @@ export default function GuideScreen() {
         <View style={styles.header}>
           <TouchableOpacity
             style={styles.topIconButton}
-            onPress={() => router.push("/choice")}
+            onPress={handleSafePlace}
             activeOpacity={0.8}
           >
             <Feather name="x" size={20} color="#fff" />
@@ -252,7 +279,7 @@ export default function GuideScreen() {
 
                     <TouchableOpacity
                       style={styles.primaryButton}
-                      onPress={() => router.push("/choice")}
+                      onPress={handleSafePlace}
                       activeOpacity={0.8}
                     >
                       <Text style={styles.primaryButtonText}>Jestem w bezpiecznym miejscu</Text>

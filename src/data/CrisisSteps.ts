@@ -33,20 +33,86 @@ export const crisisData: Record<
 > = {
   fire: {
     title: "Pożar",
-    toneColor: "#bc3b32", // Czerwono-bordowy
+    toneColor: "#2f7d56",
+    locationOptions: [
+      {
+        id: "inside",
+        label: "JESTEŚ W BUDYNKU (Mieszkanie / Dom / Biuro)",
+      },
+      {
+        id: "outside",
+        label: "JESTEŚ NA ZEWNĄTRZ (Pieszo)",
+      },
+      {
+        id: "vehicle",
+        label: "JESTEŚ W POJEŹDZIE (Samochód / Autobus)",
+      },
+    ],
+    stepsByLocation: {
+      inside: [
+        {
+          title: "",
+          text: "Czy widzisz dym albo czujesz zapach spalenizny?",
+          question: true,
+          options: [
+            {
+              id: "inside_danger",
+              label: "TAK",
+              responseTitle: "",
+              responseText:
+                "Nie wracaj po rzeczy ani zwierzęta. Schodami opuść budynek i idź do wyjścia awaryjnego. Zamykaj za soba drzwi. Oddal się od budynku na bezpieczną odległość.",
+            },
+            {
+              id: "inside_safe",
+              label: "NIE",
+              responseTitle: "",
+              responseText:
+                "Zabezpiecz lokal: Zamknij okna, wyłącz gaz i prąd. Zabierz ze sobą dokumenty, leki przyjmowane na stałe, wodę, telefon i powerbank. Wyjdź na zewnątrz schodami, nie używaj wind. Jeśli masz zwierzęta gospodarskie, spraw, aby ich ucieczka była możliwa.",
+            },
+          ],
+        },
+        {
+          title: "",
+          text: "Zamelduj się w punkcie zbiórki albo u służb, aby odnotowali, że żyjesz. Postępuj zgodnie z ich poleceniami.",
+        },
+      ],
+      outside: [
+        {
+          title: "",
+          text: "Wyznacz kierunek ucieczki: sprawdź wiatr. Uciekaj pod wiatr albo prostopadle do niego. Nigdy z wiatrem. Wybieraj drogi utwardzone, szerokie ulice i place. Unikaj traw, zarośli i wąwozów.",
+        },
+        {
+          title: "",
+          text: "Jeśli wchodzisz w dym, zasłoń usta i nos mokrą tkaniną. Poruszaj się w pozycji pochylonej, ponieważ czystsze powietrze jest przy ziemi.",
+        },
+        {
+          title: "",
+          text: "Odcięta droga: wejdź na beton, parking, zaorane pole albo do zbiornika wodnego. Jeśli nie ma wyjścia, padnij w rowie twarzą do ziemi, zasłoń głowę i ciało odzieżą.",
+        },
+        {
+          title: "",
+          text: "Zamelduj się w punkcie zbiórki albo u służb, aby odnotowali, że żyjesz. Postępuj zgodnie z ich poleceniami.",
+        },
+      ],
+      vehicle: [
+        {
+          title: "",
+          text: "Decyzja o jeździe. Jeśli możesz, wyjedź od razu z obszaru zagrożenia, z dala od dymu i płonących budynków. Nie blokuj drogi ewakuacyjnej.",
+        },
+        {
+          title: "",
+          text: "Widoczność spada do zera albo droga jest zablokowana. Zostaw samochód w bezpiecznym miejscu, jeśli sytuacja jest niebezpieczna, i odejdź pieszo w kierunku wyznaczonej strefy ewakuacyjnej.",
+        },
+        {
+          title: "",
+          text: "Po ewakuacji: meldujesz się w punkcie zbiórki albo u służb, aby odnotowali, że żyjesz. Nie wracasz po rzeczy ani zwierzęta do odwołania alarmu.",
+        },
+      ],
+    },
     steps: [
       {
-        title: "Oddal się od ognia i dymu",
-        text: "Przejdź do bezpiecznej strefy. Jeśli to możliwe, zasłoń usta i nos mokrą chustą.",
-      },
-      {
-        title: "Nie używaj windy",
-        text: "Do ewakuacji korzystaj wyłącznie z klatek schodowych i wyjść awaryjnych.",
-      },
-      {
-        title: "Powiadom służby",
-        text: "Zadzwoń pod numer alarmowy 112, gdy będziesz w bezpiecznym miejscu.",
-        locationInfo: "Punkt zbiórki: Bezpieczny teren przed budynkiem",
+        title: "Wybierz, gdzie jesteś teraz",
+        text: "Na podstawie Twojej lokalizacji pokażemy Ci właściwe kroki bezpieczeństwa.",
       },
     ],
   },
