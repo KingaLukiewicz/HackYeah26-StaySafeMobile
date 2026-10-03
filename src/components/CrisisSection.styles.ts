@@ -27,11 +27,6 @@ export const styles = StyleSheet.create({
     borderColor: "#e0e7e3",
     padding: 16,
     gap: 14,
-    shadowColor: "#2a3f36",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.04,
-    shadowRadius: 12,
-    elevation: 2,
   },
   alertIconBox: {
     width: 48,
