@@ -33,10 +33,10 @@ export default function ChoiceScreen() {
       description:
         "Wystąpienie incydentów zbrojnych lub zagrożenia atakiem powietrznym.",
       iconName: "shield-alert" as const,
-      tone: "purple" as const,
+      tone: "green" as const,
     },
   ];
-  const [selectedId, setSelectedId] = useState("evacuation");
+  const [selectedId, setSelectedId] = useState("war");
   //   Speech.speak("Działaj spokojnie. Jesteśmy z Tobą.", {
   //     language: "pl-PL",
   //     rate: 0.92,
@@ -53,7 +53,7 @@ export default function ChoiceScreen() {
           >
             <Feather name="x" size={20} color="#394a43" />
           </TouchableOpacity>
-          <Text style={styles.headerTitle}>Aktywny alarm</Text>
+          <Text style={styles.headerTitle}>Zagrożenie wojenne</Text>
           <View style={{ width: 40 }} />
         </View>
         <ScrollView contentContainerStyle={styles.content}>
