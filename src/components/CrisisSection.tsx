@@ -14,7 +14,7 @@ export default function CrisisSection() {
       <TouchableOpacity
         style={styles.manualCard}
         activeOpacity={0.8}
-        onPress={() => router.push("/guide")}
+        onPress={() => router.push("/choice")}
       >
         <View style={styles.alertIconBox}>
           <Feather name="alert-triangle" size={24} color="#bd3b33" />
