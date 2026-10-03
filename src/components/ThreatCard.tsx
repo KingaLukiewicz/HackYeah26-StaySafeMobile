@@ -9,9 +9,10 @@ interface ThreatCardProps {
   id: string;
   title: string;
   description: string;
-  iconName: "alert-triangle" | "flame" | "wind" | "home";
+  iconName: any;
   tone?: ToneType;
   isSelected?: boolean;
+  onPress?: () => void;
 }
 
 export default function ThreatCard({
@@ -21,6 +22,7 @@ export default function ThreatCard({
   iconName,
   tone = "red",
   isSelected = false,
+  onPress,
 }: ThreatCardProps) {
   const router = useRouter();
 
@@ -37,18 +39,11 @@ export default function ThreatCard({
     }
   };
 
-  const handlePress = () => {
-    router.push({
-      pathname: "/guide",
-      params: { threatId: id },
-    });
-  };
-
   return (
     <TouchableOpacity
       style={[styles.threatCard, isSelected && styles.threatCardSelected]}
       activeOpacity={0.8}
-      onPress={handlePress}
+      onPress={onPress}
     >
       <View style={[styles.threatIcon, getToneStyle(tone)]}>
         <MaterialCommunityIcons name={iconName} size={22} />
