@@ -16,7 +16,7 @@ const threatTranslations: Record<string, string> = {
 
 export default function SafeCard({
   status = "OK",
-  location = "Tworóg, Kraków",
+  location = "Czyzyny, Kraków",
 }: SafeCardProps) {
   const router = useRouter();
   const normalizedStatus = status.trim().toLowerCase();

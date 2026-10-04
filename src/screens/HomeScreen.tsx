@@ -38,7 +38,7 @@ export default function HomeScreen() {
           showsVerticalScrollIndicator={false}
         >
           <Header />
-          <SafeCard status={apiStatus} location="Tworóg, Kraków" />
+          <SafeCard status={apiStatus} location="Czyzyny, Kraków" />
           <CrisisSection />
         </ScrollView>
       </SafeAreaView>

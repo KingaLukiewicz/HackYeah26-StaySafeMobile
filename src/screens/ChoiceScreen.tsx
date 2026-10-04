@@ -88,7 +88,7 @@ export default function ChoiceScreen() {
           <View style={styles.locationBox}>
             <Text style={styles.locationBoxText}>
               <Text style={styles.locationBoxBold}>Twoja lokalizacja:</Text>{" "}
-              Tworóg, Kraków. Instrukcje uwzględnią najbliższe punkty
+              Czyzyny, Kraków. Instrukcje uwzględnią najbliższe punkty
               bezpieczeństwa.
             </Text>
           </View>
