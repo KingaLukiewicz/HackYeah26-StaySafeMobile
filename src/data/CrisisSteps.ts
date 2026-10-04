@@ -141,7 +141,11 @@ export const crisisData: Record<
         },
         {
           title: "",
-          text: "Jeśli są duże zwierzęta gospodarskie, zabezpiecz ich ucieczkę. Jeśli nie masz czasu, spuść je ze smyczy lub zabezpiecz w bezpiecznym miejscu. Zabierz wszystkich mieszkańców na najwyższe piętro.",
+          text: "Jeśli są duże zwierzęta gospodarskie, zabezpiecz ich ucieczkę. Jeśli jest możliwość zabezpiecz w bezpiecznym miejscu lub jeśli nie masz czasu, spuść je ze smyczy.",
+        },
+        {
+          title: "",
+          text: "Zabierz wszystkich mieszkańców na najwyższe piętro.",
         },
         {
           title: "",
