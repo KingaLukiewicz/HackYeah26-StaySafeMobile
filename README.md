@@ -1,56 +1,49 @@
-# Welcome to your Expo app 👋
+# StaySafeMobile 🛡️
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+StaySafeMobile to osobisty dowódca ewakuacji, który rozwiązuje problem paraliżu decyzyjnego w sytuacjach kryzysowych, zastępując pasywne alerty SMS aktywnym, cyfrowym przewodnikiem. Aplikacja błyskawicznie powiadamia o zagrożeniu i prowadzi użytkownika krok po kroku za pomocą prostych, dostosowanych do sytuacji instrukcji głosowych (hands-free).
 
-## Get started
+---
 
-1. Install dependencies
+## 🚀 Jak uruchomić projekt lokalnie
 
-   ```bash
-   npm install
-   ```
+Projekt składa się z aplikacji mobilnej (React Native / Expo) oraz lekkiego backendu (Python / FastAPI). 
+Aby przetestować aplikację, uruchom równolegle oba środowiska:
 
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
+### 1. Backend (FastAPI)
+1. Upewnij się, że masz zainstalowanego Pythona (wersja 3.7+).
+2. Zainstaluj wymagane biblioteki w terminalu:
 ```bash
-npm run reset-project
+pip install fastapi uvicorn
+```
+3. W folderze z backendem (fastapi) uruchom serwer:
+```bash
+uvicorn Emergency:app
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+(Serwer działa pod adresem: http://localhost:8000. Aby zasymulować alarm podczas testów, zmień status w pliku ApiResponse.txt z "OK" na np. "fire").
 
-### Other setup steps
+### 2. Frontend (Expo)
+1. Upewnij się, że masz zainstalowane Node.js.
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+2. W terminalu przejdź do folderu głównego aplikacji i zainstaluj potrzebne zależności:
 
-## Learn more
+```bash
+npm install
+```
+Uruchom serwer Expo (do podglądu aplikacji na telefonie konieczne jest dodanie flagi `--tunnel`):
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+npx expo start --tunnel
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Zeskanuj kod QR w aplikacji Expo Go na swoim smartfonie lub wciśnij w, aby uruchomić widok webowy w przeglądarce.
 
-## Join the community
+### Technologie
+Frontend: React Native, Expo, Expo Router, TypeScript, Expo Speech (TTS)
 
-Join our community of developers creating universal apps.
+Backend: Python, FastAPI, Uvicorn
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### Autorzy
+- Kinga Łukiewicz
+- Tomasz Naszkowski
+- Aleksandra Raczyńska
