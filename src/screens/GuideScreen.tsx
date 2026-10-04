@@ -109,11 +109,11 @@ export default function GuideScreen() {
     if (currentStepIndex < totalSteps - 1) {
       setCurrentStepIndex(currentStepIndex + 1);
     } else {
-      router.back();
+      router.push("/");
     }
   };
 
-  const goToChoice = () => {
+  const goToMain = () => {
     setSelectedDecision(null);
     setCurrentStepIndex(0);
 
@@ -123,9 +123,9 @@ export default function GuideScreen() {
         dismissAll();
         setTimeout(() => {
           try {
-            router.push("/choice");
+            router.push("/");
           } catch {
-            router.replace("/choice");
+            router.replace("/");
           }
         }, 0);
         return;
@@ -135,9 +135,9 @@ export default function GuideScreen() {
     }
 
     try {
-      router.replace("/choice");
+      router.replace("/");
     } catch {
-      router.push("/choice");
+      router.push("/");
     }
   };
 
@@ -152,11 +152,11 @@ export default function GuideScreen() {
       return;
     }
 
-    goToChoice();
+    goToMain();
   };
 
   const handleSafePlace = () => {
-    goToChoice();
+    goToMain();
   };
 
   const handleDecision = (option: (typeof decisionOptions)[number]) => {
