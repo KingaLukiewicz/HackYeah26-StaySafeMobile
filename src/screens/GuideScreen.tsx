@@ -1,6 +1,7 @@
 import { crisisData } from "@/data/CrisisSteps";
 import { Feather } from "@expo/vector-icons";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
+import * as Speech from "expo-speech";
 import { useEffect, useMemo, useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -25,10 +26,12 @@ export default function GuideScreen() {
       : currentCrisis.steps;
 
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  const [selectedDecision, setSelectedDecision] = useState<
-    | { id: string; label: string; responseTitle: string; responseText: string }
-    | null
-  >(null);
+  const [selectedDecision, setSelectedDecision] = useState<{
+    id: string;
+    label: string;
+    responseTitle: string;
+    responseText: string;
+  } | null>(null);
   const [isMuted, setIsMuted] = useState(false);
 
   useEffect(() => {
@@ -43,10 +46,60 @@ export default function GuideScreen() {
 
   const activeStep = selectedDecision
     ? {
-      title: selectedDecision.responseTitle || "",
-      text: selectedDecision.responseText,
-    }
+        title: selectedDecision.responseTitle || "",
+        text: selectedDecision.responseText,
+      }
     : currentStep;
+
+  const shouldAskLocation =
+    Boolean(currentCrisis.locationOptions?.length) && !normalizedLocation;
+
+  const decisionPrompt = useMemo(
+    () =>
+      currentCrisis.title === "Zagrożenie wojenne"
+        ? "Gdzie jesteś?"
+        : "Wskaż swoją sytuację.",
+    [currentCrisis.title]
+  );
+
+  useEffect(() => {
+    Speech.stop();
+
+    if (isMuted) {
+      return;
+    }
+
+    let textToSpeak = "";
+
+    if (shouldAskLocation) {
+      textToSpeak = decisionPrompt;
+    } else if (selectedDecision && selectedDecision.id === "no_bag") {
+      textToSpeak = selectedDecision.responseText;
+    } else if (selectedDecision) {
+      textToSpeak = activeStep.title || activeStep.text;
+    } else if (isDecisionStep) {
+      textToSpeak = currentStep.text || currentStep.title;
+    } else {
+      textToSpeak = activeStep.title || activeStep.text;
+    }
+
+    if (textToSpeak) {
+      Speech.speak(textToSpeak, {
+        language: "pl-PL",
+        rate: 0.95,
+      });
+    }
+
+    return () => {
+      Speech.stop();
+    };
+  }, [
+    currentStepIndex,
+    selectedDecision,
+    shouldAskLocation,
+    isMuted,
+    normalizedLocation,
+  ]);
 
   const handleNext = () => {
     if (isDecisionStep) {
@@ -107,13 +160,21 @@ export default function GuideScreen() {
   };
 
   const handleDecision = (option: (typeof decisionOptions)[number]) => {
-    if (normalizedLocation === "inside" && currentStepIndex === 0 && option.id === "has_bag") {
+    if (
+      normalizedLocation === "inside" &&
+      currentStepIndex === 0 &&
+      option.id === "has_bag"
+    ) {
       setSelectedDecision(null);
       setCurrentStepIndex(1);
       return;
     }
 
-    if (normalizedLocation === "inside" && currentStepIndex === 0 && option.id === "no_bag") {
+    if (
+      normalizedLocation === "inside" &&
+      currentStepIndex === 0 &&
+      option.id === "no_bag"
+    ) {
       setSelectedDecision({
         id: option.id,
         label: option.label,
@@ -130,17 +191,6 @@ export default function GuideScreen() {
       responseText: option.responseText,
     });
   };
-
-  const shouldAskLocation =
-    Boolean(currentCrisis.locationOptions?.length) && !normalizedLocation;
-
-  const decisionPrompt = useMemo(
-    () =>
-      currentCrisis.title === "Zagrożenie wojenne"
-        ? "Gdzie jesteś?"
-        : "Wskaż swoją sytuację.",
-    [currentCrisis.title]
-  );
 
   return (
     <>
@@ -179,7 +229,9 @@ export default function GuideScreen() {
               Działaj spokojnie.{"\n"}Jesteśmy z Tobą.
             </Text>
             <Text style={styles.stepCounter}>
-              {shouldAskLocation ? "1/1" : `${currentStepIndex + 1}/${totalSteps}`}
+              {shouldAskLocation
+                ? "1/1"
+                : `${currentStepIndex + 1}/${totalSteps}`}
             </Text>
           </View>
 
@@ -217,7 +269,9 @@ export default function GuideScreen() {
                       router.setParams({ location: option.id });
                     }}
                   >
-                    <Text style={styles.locationOptionTitle}>{option.label}</Text>
+                    <Text style={styles.locationOptionTitle}>
+                      {option.label}
+                    </Text>
                   </TouchableOpacity>
                 ))}
               </>
@@ -265,7 +319,9 @@ export default function GuideScreen() {
                       }}
                       activeOpacity={0.8}
                     >
-                      <Text style={styles.primaryButtonText}>Mam już wszystko</Text>
+                      <Text style={styles.primaryButtonText}>
+                        Mam już wszystko
+                      </Text>
                       <Feather name="chevron-right" size={18} color="#fff" />
                     </TouchableOpacity>
                   </>
@@ -282,7 +338,9 @@ export default function GuideScreen() {
                       onPress={handleSafePlace}
                       activeOpacity={0.8}
                     >
-                      <Text style={styles.primaryButtonText}>Jestem w bezpiecznym miejscu</Text>
+                      <Text style={styles.primaryButtonText}>
+                        Jestem w bezpiecznym miejscu
+                      </Text>
                       <Feather name="check" size={18} color="#fff" />
                     </TouchableOpacity>
                   </>
@@ -302,7 +360,9 @@ export default function GuideScreen() {
                           activeOpacity={0.9}
                           onPress={() => handleDecision(option)}
                         >
-                          <Text style={styles.decisionButtonText}>{option.label}</Text>
+                          <Text style={styles.decisionButtonText}>
+                            {option.label}
+                          </Text>
                         </TouchableOpacity>
                       ))}
                     </View>
@@ -321,7 +381,9 @@ export default function GuideScreen() {
                       activeOpacity={0.8}
                     >
                       <Text style={styles.primaryButtonText}>
-                        {currentStepIndex < totalSteps - 1 ? "Dalej" : "Jestem w bezpiecznym miejscu"}
+                        {currentStepIndex < totalSteps - 1
+                          ? "Dalej"
+                          : "Jestem w bezpiecznym miejscu"}
                       </Text>
                       <Feather
                         name={
